@@ -1,0 +1,94 @@
+# PPO训练配置文件
+# Day 7 - PPO算法训练参数
+
+# 基础训练参数
+training:
+  total_timesteps: 100000        # 总训练步数（可调整：10000, 50000, 100000, 200000）
+  scenario: 'default'            # 训练场景
+  n_eval_episodes: 5             # 评估轮数
+  eval_freq: 10000               # 评估频率（每N步评估一次）
+  save_freq: 20000               # 检查点保存频率
+
+# PPO超参数（默认配置）
+ppo_hyperparams:
+  learning_rate: 0.0003          # 学习率（3e-4）
+  n_steps: 2048                  # 每次更新的步数
+  batch_size: 64                 # 批大小
+  n_epochs: 10                   # 每次更新的epoch数
+  gamma: 0.99                    # 折扣因子
+  gae_lambda: 0.95               # GAE参数
+  clip_range: 0.2                # PPO裁剪范围
+  ent_coef: 0.01                 # 熵系数（鼓励探索）
+  vf_coef: 0.5                   # 值函数系数
+  max_grad_norm: 0.5             # 梯度裁剪
+  verbose: 1                     # 日志详细程度
+
+# 可选：调整方案
+
+# 方案1: 快速训练（测试用）
+quick_test:
+  total_timesteps: 10000
+  learning_rate: 0.0003
+  n_steps: 512
+  batch_size: 32
+
+# 方案2: 平衡方案（推荐）
+balanced:
+  total_timesteps: 100000
+  learning_rate: 0.0003
+  n_steps: 2048
+  batch_size: 64
+
+# 方案3: 深度训练（性能优先）
+deep_training:
+  total_timesteps: 300000
+  learning_rate: 0.0001          # 更小的学习率
+  n_steps: 4096                  # 更大的步数
+  batch_size: 128                # 更大的batch
+  n_epochs: 15                   # 更多epoch
+
+# 方案4: 保守训练（收敛困难时）
+conservative:
+  total_timesteps: 200000
+  learning_rate: 0.0001          # 降低学习率
+  n_steps: 1024                  
+  batch_size: 32
+  clip_range: 0.1                # 更小的裁剪范围
+  ent_coef: 0.001                # 降低探索
+
+# 评估配置
+evaluation:
+  scenarios:
+    - 'default'
+    - 'sunny_weekday'
+    - 'rainy_weekend'
+    - 'summer_peak'
+    - 'winter_low'
+  n_episodes_per_scenario: 10
+  
+# 基线对比
+baseline:
+  policy: 'Proportional-Optimized'
+  threshold: 0.25
+  rebalance_ratio: 0.2
+  target_metrics:
+    service_rate: 0.9999         # 目标：99.99%
+    net_profit: 125149           # 目标：$125,149
+    total_cost: 1147             # 目标：$1,147
+
+# 输出配置
+output:
+  models_dir: 'results/ppo_training/models'
+  logs_dir: 'results/ppo_training/logs'
+  eval_dir: 'results/ppo_evaluation'
+  
+# 硬件配置
+hardware:
+  use_gpu: false                 # 是否使用GPU（如果可用）
+  n_envs: 1                      # 并行环境数（VecEnv）
+  
+# 调试选项
+debug:
+  check_env: true                # 训练前检查环境
+  log_interval: 10               # 日志打印间隔
+  progress_bar: true             # 显示进度条

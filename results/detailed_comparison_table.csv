@@ -1,0 +1,16 @@
+policy,scenario,service_rate,net_profit,total_cost
+Min-Cost-Flow,default,0.95,125674.94,0.0
+Min-Cost-Flow,rainy_weekend,0.96,112485.3,0.0
+Min-Cost-Flow,summer_peak,0.95,128243.81,0.0
+Min-Cost-Flow,sunny_weekday,0.95,125674.94,0.0
+Min-Cost-Flow,winter_low,0.96,108985.7,0.0
+Proportional-Optimized,default,1.0,130903.09,1152.22
+Proportional-Optimized,rainy_weekend,1.0,116868.77,1231.23
+Proportional-Optimized,summer_peak,1.0,134366.16,1173.68
+Proportional-Optimized,sunny_weekday,1.0,130903.09,1152.22
+Proportional-Optimized,winter_low,1.0,112705.07,1025.6
+Zero-Action,default,0.94,124635.07,0.0
+Zero-Action,rainy_weekend,0.95,112876.73,0.0
+Zero-Action,summer_peak,0.94,127445.87,0.0
+Zero-Action,sunny_weekday,0.94,124635.07,0.0
+Zero-Action,winter_low,0.97,110299.01,0.0

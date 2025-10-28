@@ -66,7 +66,9 @@ class BasePolicy(ABC):
             'total_cost': self.total_cost,
             'avg_cost_per_rebalance': self.total_cost / max(1, self.total_rebalances)
         }
-
+    def reset(self):
+        """默认重置（子类可覆盖）"""
+        return None
 
 class ZeroActionPolicy(BasePolicy):
     """
@@ -251,6 +253,20 @@ class ProportionalRefillPolicy(BasePolicy):
         
         return action
 
+    def reset(self):
+        """重置策略内部状态（用于多 episode 评估）"""
+        # 清理可能存在的缓存/内部状态
+        for attr in ['_last_action', '_buffer', 'internal_state', '_infeasible_count']:
+            if hasattr(self, attr):
+                try:
+                    setattr(self, attr, None)
+                except Exception:
+                    pass
+        # 重置统计信息
+        try:
+            self.reset_stats()
+        except Exception:
+            pass
 
 class MinCostFlowPolicy(BasePolicy):
     """

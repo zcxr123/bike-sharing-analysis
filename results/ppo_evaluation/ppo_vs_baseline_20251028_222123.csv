@@ -1,0 +1,13 @@
+,,service_rate,service_rate,net_profit,net_profit,total_cost,total_cost
+,,mean,std,mean,std,mean,std
+policy,scenario,,,,,,
+PPO,default,0.0,0.0,129491.4423,919.5029,2220.9981,182.6243
+PPO,rainy_weekend,0.0,0.0,114873.907,512.9748,2163.4778,140.605
+PPO,summer_peak,0.0,0.0,132559.752,872.9355,2087.7384,188.295
+PPO,sunny_weekday,0.0,0.0,129491.4423,919.5029,2220.9981,182.6243
+PPO,winter_low,0.0,0.0,109566.4706,817.3358,2168.7417,131.5754
+Proportional-Optimized,default,0.0,0.0,130759.1882,909.3083,1249.2215,137.0761
+Proportional-Optimized,rainy_weekend,0.0,0.0,116718.0218,468.2608,1201.8826,160.1417
+Proportional-Optimized,summer_peak,0.0,0.0,134101.5044,786.7399,1271.9579,156.0668
+Proportional-Optimized,sunny_weekday,0.0,0.0,130759.1882,909.3083,1249.2215,137.0761
+Proportional-Optimized,winter_low,0.0,0.0,112404.0074,670.8704,970.3984,114.0628
