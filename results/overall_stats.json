@@ -1,0 +1,9 @@
+{
+  "total_orders": 100000,
+  "total_users": 10000,
+  "total_bikes": 5000,
+  "avg_duration_minutes": 16.465869833333333,
+  "avg_distance_km": 3.2446968,
+  "avg_fee": 4.003208999999993,
+  "total_revenue": 400320.8999999993
+}

@@ -1,0 +1,288 @@
+# 共享单车调度环境配置 (Environment Configuration)
+# ======================================================
+# 作者: renr
+# 日期: 2025-10-29 (Day 4)
+# 版本: v1.1 (包含Day 3修复的还车机制)
+
+# ============================================================================
+# 1. 区域配置 (Zones)
+# ============================================================================
+zones:
+  num_zones: 6
+  zone_names:
+    - A_Capitol_Hill
+    - B_Downtown
+    - C_Georgetown
+    - D_Dupont_Circle
+    - E_Shaw
+    - F_Navy_Yard
+  
+  # 区域权重（反映热度，和为1.0）
+  zone_weights: [0.25, 0.25, 0.15, 0.15, 0.10, 0.10]
+  
+  # 区域容量（单车数量上限）
+  zone_capacity: [200, 200, 120, 120, 80, 80]
+  
+  # 区域坐标（用于可视化）
+  zone_coords:
+    - [38.8899, -77.0091]  # A_Capitol_Hill
+    - [38.9072, -77.0369]  # B_Downtown
+    - [38.9076, -77.0723]  # C_Georgetown
+    - [38.9097, -77.0436]  # D_Dupont_Circle
+    - [38.9129, -77.0262]  # E_Shaw
+    - [38.8764, -76.9951]  # F_Navy_Yard
+
+# ============================================================================
+# 2. 时间配置 (Time)
+# ============================================================================
+time:
+  time_horizon: 168          # 模拟时长（小时），168 = 7天 × 24小时
+  step_size: 1               # 时间步长（小时）
+  rebalance_frequency: 24    # 调度频率（小时），24 = 每天夜间集中调度一次
+  start_hour: 0              # 起始小时
+  start_season: 2            # 起始季节 (1=冬, 2=春, 3=夏, 4=秋)
+  start_workingday: 1        # 起始工作日标识 (0=周末, 1=工作日)
+  start_weather: 1           # 起始天气 (1=晴, 2=多云, 3=小雨, 4=大雨)
+
+# ============================================================================
+# 3. 库存配置 (Inventory)
+# ============================================================================
+inventory:
+  total_bikes: 800                        # 总单车数量
+  initial_distribution: "proportional"    # 初始分布 (uniform/proportional/random)
+  
+  # 单车类型比例
+  bike_type_ratio:
+    normal: 0.7   # 普通车 70%
+    ebike: 0.3    # 助力车 30%
+  
+  # 还车机制配置 (Day 3新增)
+  return_mechanism:
+    enabled: true                    # 是否启用还车机制
+    deterministic_ratio: 0.85        # 确定性还车比例（按区域权重）
+    random_ratio: 0.15               # 随机还车比例
+    immediate_return: true           # 是否立即还车（不考虑骑行时长）
+
+# ============================================================================
+# 4. 需求配置 (Demand)
+# ============================================================================
+demand:
+  lambda_params_path: "../results/lambda_params.pkl"  # λ(t)参数文件路径
+  demand_scale: 1.0                                # 需求缩放因子
+  random_seed: 42                                  # 随机种子
+  
+  # 极端事件配置
+  extreme_events:
+    enabled: false        # 是否启用极端事件
+    probability: 0.05     # 发生概率
+    multiplier: 2.0       # 需求倍增系数
+  
+  # λ(t)组合权重
+  lambda_weights:
+    hour: 0.4        # 小时维度权重 40%
+    season: 0.2      # 季节维度权重 20%
+    workingday: 0.2  # 工作日维度权重 20%
+    weather: 0.2     # 天气维度权重 20%
+
+# ============================================================================
+# 5. 经济参数 (Economics)
+# ============================================================================
+economics:
+  revenue_per_trip: 4.0        # 每单收入（美元）
+  penalty_per_unmet: 2.0       # 每未满足需求惩罚（美元）
+  
+  # 调度成本矩阵 (6×6)
+  # 行：起点区域，列：终点区域，对角线为0
+  cost_matrix:
+    - [0.0, 1.5, 2.0, 1.5, 1.0, 2.5]
+    - [1.5, 0.0, 2.5, 1.0, 1.5, 2.0]
+    - [2.0, 2.5, 0.0, 2.0, 2.5, 3.0]
+    - [1.5, 1.0, 2.0, 0.0, 1.0, 1.5]
+    - [1.0, 1.5, 2.5, 1.0, 0.0, 2.0]
+    - [2.5, 2.0, 3.0, 1.5, 2.0, 0.0]
+  
+  rebalance_budget: 500.0      # 每日调度预算（美元）
+  max_rebalance_qty: 50        # 单次最大调度量（辆）
+
+# ============================================================================
+# 6. 奖励配置 (Reward)
+# ============================================================================
+reward:
+  reward_type: "profit"             # 奖励类型 (profit/service_rate/mixed)
+  normalize: true                   # 是否归一化奖励
+  normalization_factor: 1000.0      # 归一化系数
+  gamma: 0.99                       # 折扣因子
+  
+  # 混合奖励权重（当reward_type="mixed"时使用）
+  mixed_weights:
+    profit: 0.7
+    service_rate: 0.3
+
+# ============================================================================
+# 7. 环境行为 (Environment Behavior)
+# ============================================================================
+environment:
+  normalize_state: true                   # 是否归一化状态
+  action_space_type: "continuous"         # 动作空间类型 (continuous/discrete)
+  clip_actions: true                      # 是否裁剪动作
+  render_mode: null                       # 渲染模式 (null/human/rgb_array)
+  check_inventory_conservation: true      # 是否检查库存守恒
+
+# ============================================================================
+# 8. 场景配置 (Scenarios)
+# ============================================================================
+scenarios:
+  # 场景1: 默认场景（春季晴天工作日）
+  default:
+    season: 2           # 春季
+    weather: 1          # 晴天
+    workingday: 1       # 工作日
+    demand_scale: 1.0
+  
+  # 场景2: 晴天工作日（理想场景）
+  sunny_weekday:
+    season: 2
+    weather: 1
+    workingday: 1
+    demand_scale: 1.0
+  
+  # 场景3: 雨天周末（低需求场景）
+  rainy_weekend:
+    season: 2
+    weather: 3          # 小雨
+    workingday: 0       # 周末
+    demand_scale: 0.7
+  
+  # 场景4: 夏季高峰（高需求场景）
+  summer_peak:
+    season: 3           # 夏季
+    weather: 1
+    workingday: 1
+    demand_scale: 1.2
+  
+  # 场景5: 冬季低谷（低需求场景）
+  winter_low:
+    season: 1           # 冬季
+    weather: 2          # 多云
+    workingday: 0
+    demand_scale: 0.6
+
+# ============================================================================
+# 9. 日志与性能 (Logging & Performance)
+# ============================================================================
+logging:
+  level: "INFO"                    # 日志级别 (DEBUG/INFO/WARNING/ERROR)
+  log_trajectory: false            # 是否记录完整轨迹
+  log_dir: "logs/"                 # 日志目录
+  log_frequency: 24                # 日志记录频率（步）
+
+performance:
+  vectorized: true                 # 是否向量化计算
+  num_envs: 1                      # 并行环境数量（用于并行训练）
+  use_gpu: false                   # 是否使用GPU（需要GPU支持）
+
+# ============================================================================
+# 10. 基线策略配置 (Baseline Policies)
+# ============================================================================
+baseline_policies:
+  zero_action:
+    enabled: true
+    description: "不调度策略"
+  
+  proportional_refill:
+    enabled: true
+    description: "按比例补货策略"
+    threshold: 0.25                # 触发阈值 (已用网格搜索优化)
+    rebalance_ratio: 0.2           # 调度比例 (已用网格搜索优化)
+    parameter_grid:                # ← 添加这部分
+      threshold: [0.05, 0.10, 0.15, 0.20, 0.25]
+      rebalance_ratio: [0.2, 0.3, 0.5, 0.7, 0.8]
+  
+  min_cost_flow:
+    enabled: true
+    description: "最小成本流策略"
+    threshold: 0.15                # 触发阈值
+    use_expected_demand: false     # 是否使用期望需求
+
+# ============================================================================
+# 11. 评估配置 (Evaluation)
+# ============================================================================
+evaluation:
+  num_episodes: 5                  # 评估轮数
+  episode_length: 168              # 每轮长度（小时）
+  random_seeds: [42, 43, 44, 45, 46]  # 随机种子列表
+  
+  # 评估指标
+  metrics:
+    - service_rate                 # 服务率
+    - unmet_demand                 # 未满足需求
+    - total_revenue                # 总收入
+    - total_cost                   # 总调度成本
+    - net_profit                   # 净利润
+    - avg_inventory                # 平均库存
+    - inventory_std                # 库存标准差
+  
+  # 对比场景
+  comparison_scenarios:
+    - sunny_weekday
+    - rainy_weekend
+    - summer_peak
+    - winter_low
+  
+  # 输出格式
+  output:
+    save_csv: true                 # 保存CSV结果
+    save_plots: true               # 保存图表
+    save_trajectory: false         # 保存轨迹数据
+    output_dir: "results/"         # 输出目录
+
+# ============================================================================
+# 12. 可视化配置 (Visualization)
+# ============================================================================
+visualization:
+  dashboard:
+    enabled: true
+    port: 5000
+    host: "0.0.0.0"
+  
+  plots:
+    style: "seaborn"               # 绘图风格
+    figsize: [12, 8]               # 图表尺寸
+    dpi: 100                       # 分辨率
+    colors:                        # 策略颜色映射
+      zero: "#FF6B6B"              # 红色
+      proportional: "#4ECDC4"      # 青色
+      mincost: "#45B7D1"           # 蓝色
+      ppo: "#FFA07A"               # 橙色
+
+# ============================================================================
+# 13. 参数优化配置 (Day 5 新增)
+# ============================================================================
+optimization:
+  method: "grid_search"              # 优化方法：grid_search | bayesian | random
+  parallel: false                    # 是否并行评估
+  max_evaluations: 100               # 最大评估次数
+  target_metric: "net_profit"        # 优化目标：net_profit | service_rate
+  cv_folds: 3                        # 交叉验证折数
+  scenarios:                         # 评估场景
+    - default
+    - sunny_weekday
+    - rainy_weekend
+  early_stopping:
+    enabled: true
+    patience: 10
+    min_improvement: 0.001
+  
+  # 参数搜索空间
+  parameter_grids:
+    proportional_refill:
+      threshold: [0.05, 0.10, 0.15, 0.20, 0.25]
+      rebalance_ratio: [0.2, 0.3, 0.5, 0.7, 0.8]
+# ============================================================================
+# 版本信息 (Version Info)
+# ============================================================================
+version: "1.1"
+last_updated: "2025-10-28"
+author: "renr"
+project: "共享单车数据分析与强化学习调度"
+milestone: "M2 - Day 5"

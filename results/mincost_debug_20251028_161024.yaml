@@ -1,0 +1,124 @@
+default:
+  avg_net_profit: !!python/object/apply:numpy._core.multiarray.scalar
+  - &id001 !!python/object/apply:numpy.dtype
+    args:
+    - f8
+    - false
+    - true
+    state: !!python/tuple
+    - 3
+    - <
+    - null
+    - null
+    - null
+    - -1
+    - -1
+    - 0
+  - !!binary |
+    6InJI7Ft/kA=
+  avg_service_rate: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id001
+  - !!binary |
+    Ndrov7Mn7j8=
+  episodes:
+  - net_profit: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      9oGcjFGn/kA=
+    service_rate: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      RIQSYzBM7j8=
+    total_cost: 0.0
+  - net_profit: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      m1m3kyyr/kA=
+    service_rate: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      JinGkI9y7j8=
+    total_cost: 0.0
+  - net_profit: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      KMIIS5X2/UA=
+    service_rate: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      OOHhS1u47T8=
+    total_cost: 0.0
+rainy_weekend:
+  avg_net_profit: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id001
+  - !!binary |
+    XUSbs8uO+0A=
+  avg_service_rate: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id001
+  - !!binary |
+    O1HsCUKF7j8=
+  episodes:
+  - net_profit: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      n16LVhl7+0A=
+    service_rate: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      dX9WPC6T7j8=
+    total_cost: 0.0
+  - net_profit: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      1cAh6cKh+0A=
+    service_rate: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      BgswhqOX7j8=
+    total_cost: 0.0
+  - net_profit: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      o60k24aP+0A=
+    service_rate: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      Nmk+W/Rk7j8=
+    total_cost: 0.0
+sunny_weekday:
+  avg_net_profit: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id001
+  - !!binary |
+    6InJI7Ft/kA=
+  avg_service_rate: !!python/object/apply:numpy._core.multiarray.scalar
+  - *id001
+  - !!binary |
+    Ndrov7Mn7j8=
+  episodes:
+  - net_profit: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      9oGcjFGn/kA=
+    service_rate: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      RIQSYzBM7j8=
+    total_cost: 0.0
+  - net_profit: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      m1m3kyyr/kA=
+    service_rate: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      JinGkI9y7j8=
+    total_cost: 0.0
+  - net_profit: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      KMIIS5X2/UA=
+    service_rate: !!python/object/apply:numpy._core.multiarray.scalar
+    - *id001
+    - !!binary |
+      OOHhS1u47T8=
+    total_cost: 0.0

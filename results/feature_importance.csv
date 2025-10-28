@@ -1,0 +1,15 @@
+feature,importance
+is_daytime,0.4312346
+is_rush_hour,0.13372774
+hr,0.13341627
+workingday,0.072034895
+yr,0.068685934
+temp,0.038084045
+atemp,0.03308833
+season,0.029366033
+weathersit,0.018083502
+hum,0.014507698
+weekday,0.012635936
+mnth,0.008007583
+holiday,0.0044021467
+windspeed,0.0027252778

@@ -1,0 +1,912 @@
+======================================================================
+Day 5: 策略参数优化
+======================================================================
+
+======================================================================
+任务1: Proportional策略参数优化
+======================================================================
+
+============================================================
+网格搜索优化 - Proportional策略
+============================================================
+参数空间: threshold=[0.05, 0.1, 0.15, 0.2, 0.25], ratio=[0.2, 0.3, 0.5, 0.7, 0.8]
+评估场景: ['default', 'sunny_weekday', 'rainy_weekend']
+目标指标: net_profit
+
+[1/25] 测试: threshold=0.05, ratio=0.20
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: default
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: sunny_weekday
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: rainy_weekend
+  → net_profit: 125547.91 ± 6471.24
+  ✨ 新的最优参数！
+[2/25] 测试: threshold=0.05, ratio=0.30
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: default
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: sunny_weekday
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: rainy_weekend
+  → net_profit: 125234.17 ± 6425.05
+[3/25] 测试: threshold=0.05, ratio=0.50
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: default
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: sunny_weekday
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: rainy_weekend
+  → net_profit: 124799.47 ± 6417.18
+[4/25] 测试: threshold=0.05, ratio=0.70
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: default
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: sunny_weekday
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: rainy_weekend
+  → net_profit: 124622.99 ± 6409.32
+[5/25] 测试: threshold=0.05, ratio=0.80
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: default
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: sunny_weekday
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: rainy_weekend
+  → net_profit: 124591.76 ± 6401.43
+[6/25] 测试: threshold=0.10, ratio=0.20
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: default
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: sunny_weekday
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: rainy_weekend
+  → net_profit: 125908.46 ± 6484.23
+  ✨ 新的最优参数！
+[7/25] 测试: threshold=0.10, ratio=0.30
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: default
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: sunny_weekday
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: rainy_weekend
+  → net_profit: 125778.98 ± 6461.37
+[8/25] 测试: threshold=0.10, ratio=0.50
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: default
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: sunny_weekday
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: rainy_weekend
+  → net_profit: 125580.84 ± 6444.43
+[9/25] 测试: threshold=0.10, ratio=0.70
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: default
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: sunny_weekday
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: rainy_weekend
+  → net_profit: 125447.11 ± 6397.09
+[10/25] 测试: threshold=0.10, ratio=0.80
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: default
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: sunny_weekday
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: rainy_weekend
+  → net_profit: 125386.12 ± 6403.02
+[11/25] 测试: threshold=0.15, ratio=0.20
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: default
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: sunny_weekday
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: rainy_weekend
+  → net_profit: 126080.48 ± 6479.32
+  ✨ 新的最优参数！
+[12/25] 测试: threshold=0.15, ratio=0.30
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: default
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: sunny_weekday
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: rainy_weekend
+  → net_profit: 126005.13 ± 6475.40
+[13/25] 测试: threshold=0.15, ratio=0.50
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: default
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: sunny_weekday
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: rainy_weekend
+  → net_profit: 125899.71 ± 6486.61
+[14/25] 测试: threshold=0.15, ratio=0.70
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: default
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: sunny_weekday
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: rainy_weekend
+  → net_profit: 125850.96 ± 6463.27
+[15/25] 测试: threshold=0.15, ratio=0.80
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: default
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: sunny_weekday
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: rainy_weekend
+  → net_profit: 125813.32 ± 6450.45
+[16/25] 测试: threshold=0.20, ratio=0.20
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: default
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: sunny_weekday
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: rainy_weekend
+  → net_profit: 126200.45 ± 6504.90
+  ✨ 新的最优参数！
+[17/25] 测试: threshold=0.20, ratio=0.30
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: default
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: sunny_weekday
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: rainy_weekend
+  → net_profit: 126150.88 ± 6503.39
+[18/25] 测试: threshold=0.20, ratio=0.50
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: default
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: sunny_weekday
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: rainy_weekend
+  → net_profit: 126059.66 ± 6468.21
+[19/25] 测试: threshold=0.20, ratio=0.70
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: default
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: sunny_weekday
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: rainy_weekend
+  → net_profit: 126042.72 ± 6507.37
+[20/25] 测试: threshold=0.20, ratio=0.80
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: default
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: sunny_weekday
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: rainy_weekend
+  → net_profit: 125996.17 ± 6416.53
+[21/25] 测试: threshold=0.25, ratio=0.20
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: default
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: sunny_weekday
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: rainy_weekend
+  → net_profit: 126268.66 ± 6503.64
+  ✨ 新的最优参数！
+[22/25] 测试: threshold=0.25, ratio=0.30
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: default
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: sunny_weekday
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: rainy_weekend
+  → net_profit: 126250.33 ± 6503.74
+[23/25] 测试: threshold=0.25, ratio=0.50
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: default
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: sunny_weekday
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: rainy_weekend
+  → net_profit: 126158.68 ± 6489.81
+[24/25] 测试: threshold=0.25, ratio=0.70
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: default
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: sunny_weekday
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: rainy_weekend
+  → net_profit: 126151.47 ± 6490.01
+[25/25] 测试: threshold=0.25, ratio=0.80
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: default
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: sunny_weekday
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: rainy_weekend
+  → net_profit: 126101.09 ± 6494.65
+
+============================================================
+优化完成！
+最优参数: {'threshold': 0.25, 'rebalance_ratio': 0.2}
+最优得分: 126268.66
+============================================================
+
+✅ 最优参数已保存: /home/renr/bike-sharing-analysis/results/best_proportional_params_20251028_161024.yaml
+✅ 详细结果已保存: /home/renr/bike-sharing-analysis/results/proportional_optimization_20251028_161024.csv
+
+======================================================================
+任务2: Min-Cost Flow策略调试
+======================================================================
+
+测试场景: default
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: default
+Warning: Min-cost flow is infeasible. This is normal in Mock environment.
+Subsequent warnings will be suppressed...
+  平均服务率: 94.23%
+  平均净利润: $124635.07
+
+测试场景: sunny_weekday
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: sunny_weekday
+Warning: Min-cost flow is infeasible. This is normal in Mock environment.
+Subsequent warnings will be suppressed...
+  平均服务率: 94.23%
+  平均净利润: $124635.07
+
+测试场景: rainy_weekend
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: rainy_weekend
+Warning: Min-cost flow is infeasible. This is normal in Mock environment.
+Subsequent warnings will be suppressed...
+  平均服务率: 95.38%
+  平均净利润: $112876.73
+
+✅ 调试结果已保存: /home/renr/bike-sharing-analysis/results/mincost_debug_20251028_161024.yaml
+
+======================================================================
+任务3: 多场景策略评估
+======================================================================
+使用优化参数: threshold=0.25, ratio=0.20
+
+
+──────────────────────────────────────────────────
+场景: default
+──────────────────────────────────────────────────
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: default
+  策略: Zero-Action... 服务率=94.2%, 净利润=$124635
+  策略: Proportional-Optimized... 服务率=100.0%, 净利润=$130903
+  策略: Min-Cost-Flow... Warning: Min-cost flow is infeasible. This is normal in Mock environment.
+Subsequent warnings will be suppressed...
+服务率=95.2%, 净利润=$125675
+
+──────────────────────────────────────────────────
+场景: sunny_weekday
+──────────────────────────────────────────────────
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: sunny_weekday
+  策略: Zero-Action... 服务率=94.2%, 净利润=$124635
+  策略: Proportional-Optimized... 服务率=100.0%, 净利润=$130903
+  策略: Min-Cost-Flow... Warning: Min-cost flow is infeasible. This is normal in Mock environment.
+Subsequent warnings will be suppressed...
+服务率=95.2%, 净利润=$125675
+
+──────────────────────────────────────────────────
+场景: rainy_weekend
+──────────────────────────────────────────────────
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: rainy_weekend
+  策略: Zero-Action... 服务率=95.4%, 净利润=$112877
+  策略: Proportional-Optimized... 服务率=100.0%, 净利润=$116869
+  策略: Min-Cost-Flow... Warning: Min-cost flow is infeasible. This is normal in Mock environment.
+Subsequent warnings will be suppressed...
+服务率=95.7%, 净利润=$112485
+
+──────────────────────────────────────────────────
+场景: summer_peak
+──────────────────────────────────────────────────
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: summer_peak
+  策略: Zero-Action... 服务率=94.0%, 净利润=$127446
+  策略: Proportional-Optimized... 服务率=100.0%, 净利润=$134366
+  策略: Min-Cost-Flow... Warning: Min-cost flow is infeasible. This is normal in Mock environment.
+Subsequent warnings will be suppressed...
+服务率=94.8%, 净利润=$128244
+
+──────────────────────────────────────────────────
+场景: winter_low
+──────────────────────────────────────────────────
+[Info] 从 /home/renr/bike-sharing-analysis/results/lambda_params.pkl 加载 Lambda 参数
+[DemandSampler] 初始化完成
+  - 区域数量: 6
+  - 需求放大系数: 1.0
+  - 总体平均需求: 189.46 单/小时
+[BikeEnv] 环境初始化完成
+  - 区域数: 6
+  - 时间跨度: 168小时
+  - 场景: winter_low
+  策略: Zero-Action... 服务率=97.4%, 净利润=$110299
+  策略: Proportional-Optimized... 服务率=100.0%, 净利润=$112705
+  策略: Min-Cost-Flow... Warning: Min-cost flow is infeasible. This is normal in Mock environment.
+Subsequent warnings will be suppressed...
+服务率=96.3%, 净利润=$108986
+
+✅ 多场景评估结果已保存: /home/renr/bike-sharing-analysis/results/multi_scenario_comparison_20251028_161025.csv
+✅ 评估报告已生成: /home/renr/bike-sharing-analysis/results/day5_evaluation_report_20251028_161025.md
+
+======================================================================
+✅ Day 5 所有任务完成！
+======================================================================
+最优Proportional参数: {'threshold': 0.25, 'rebalance_ratio': 0.2}
+评估了 5 个场景
+所有结果已保存到 results/ 目录
+======================================================================
