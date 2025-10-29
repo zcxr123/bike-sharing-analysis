@@ -1,0 +1,19 @@
+{
+  "title": "\u5171\u4eab\u5355\u8f66\u667a\u80fd\u8c03\u5ea6\u7cfb\u7edf",
+  "subtitle": "\u57fa\u4e8e\u5f3a\u5316\u5b66\u4e60\u7684\u6210\u672c\u4f18\u5316\u65b9\u6848",
+  "version": "1.0",
+  "last_updated": "2025-10-29 11:17:05",
+  "data_files": {
+    "comparison": "data/comparison.csv",
+    "decisions": "data/decisions.csv",
+    "summary": "data/summary.pkl"
+  },
+  "plot_files": [
+    "service_cost_tradeoff.png",
+    "roi_comparison.png",
+    "cost_comparison_bar.png",
+    "scenario_heatmap.png",
+    "improvement_summary.png",
+    "metric_radar.png"
+  ]
+}
