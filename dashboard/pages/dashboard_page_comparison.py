@@ -19,7 +19,7 @@ except Exception:
     spec.loader.exec_module(_shared)
     inject_base_style = _shared.inject_base_style
 
-st.set_page_config(page_title="策略对比", page_icon="📈", layout="wide")
+st.set_page_config(page_title=" 策略对比", layout="wide")
 
 # 注入共享样式
 inject_base_style()
@@ -36,11 +36,11 @@ def load_data():
         return pd.DataFrame()
 
 def main():
-    st.markdown('<div class="page-header">📈 策略性能对比</div>', unsafe_allow_html=True)
+    st.markdown('<div class="page-header"> 策略性能对比</div>', unsafe_allow_html=True)
     st.markdown("---")
     # 快速导航按钮
     coln = st.columns([1,1,6])[0]
-    if st.button("🏠 返回主页"):
+    if st.button("返回主页"):
         st.experimental_set_query_params(page='')
     st.markdown("\n")
     
@@ -48,12 +48,12 @@ def main():
     df = load_data()
     
     if df.empty:
-        st.error("❌ 未找到对比数据，请先运行数据准备脚本")
+        st.error(" 未找到对比数据，请先运行数据准备脚本")
         st.code("python3 scripts/day10_prepare_data.py")
         return
     
     # 控制面板
-    st.markdown("### 🎛️ 控制面板")
+    st.markdown("###  控制面板")
     
     col1, col2, col3 = st.columns(3)
     
@@ -94,13 +94,13 @@ def main():
         filtered_df = filtered_df[filtered_df['scenario'] == selected_scenario]
     
     if filtered_df.empty:
-        st.warning("⚠️ 没有数据，请调整筛选条件")
+        st.warning(" 没有数据，请调整筛选条件")
         return
     
     st.markdown("---")
     
     # 对比图表
-    st.markdown("### 📊 对比图表")
+    st.markdown("###  对比图表")
     
     tab1, tab2, tab3 = st.tabs(["柱状图对比", "箱线图分析", "散点图关系"])
     
@@ -158,7 +158,7 @@ def main():
     st.markdown("---")
     
     # 详细统计
-    st.markdown("### 📋 详细统计")
+    st.markdown("###  详细统计")
     
     summary = filtered_df.groupby('model').agg({
         'service_rate': ['mean', 'std', 'min', 'max'],
@@ -174,7 +174,7 @@ def main():
     # 下载按钮
     csv = summary.to_csv(index=False)
     st.download_button(
-        label="📥 下载统计数据",
+        label=" 下载统计数据",
         data=csv,
         file_name="strategy_comparison_summary.csv",
         mime="text/csv"
@@ -183,7 +183,7 @@ def main():
     st.markdown("---")
     
     # 关键洞察
-    st.markdown("### 💡 关键洞察")
+    st.markdown("###  关键洞察")
     
     if len(selected_models) >= 2:
         model1, model2 = selected_models[0], selected_models[1]
@@ -231,12 +231,12 @@ def main():
         """)
     
     # 原始数据查看
-    with st.expander("📄 查看原始数据"):
+    with st.expander(" 查看原始数据"):
         st.dataframe(filtered_df, width='stretch')
 
         csv = filtered_df.to_csv(index=False)
         st.download_button(
-            label="📥 下载原始数据",
+            label=" 下载原始数据",
             data=csv,
             file_name="filtered_comparison_data.csv",
             mime="text/csv"

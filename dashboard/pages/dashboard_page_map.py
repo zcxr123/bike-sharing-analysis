@@ -5,6 +5,7 @@
 - 显示区域当前车辆与需求
 - 通过模拟步展示调度效果（包含自动/手动运行）
 - 支持查看每个区域的详细信息与最近操作
+- 改进：添加更好的背景地图样式
 """
 
 import streamlit as st
@@ -31,7 +32,7 @@ except Exception:
     spec.loader.exec_module(_shared)
     inject_base_style = _shared.inject_base_style
 
-st.set_page_config(page_title="地图可视化", page_icon="🗺️", layout="wide")
+st.set_page_config(page_title="🗺️地图可视化", page_icon="🗺️", layout="wide")
 
 # 注入共享样式
 inject_base_style()
@@ -108,13 +109,82 @@ def get_status_color(bikes, capacity=150):
         return 'green', '正常'
 
 def create_map():
-    """创建地图"""
-    # 以华盛顿特区为中心
+    """创建地图 - 改进版，支持多种背景地图样式"""
+    
+    # 计算所有区域的边界，用于自动调整地图视图
+    all_coords = [info['coords'] for info in REGION_INFO.values()]
+    
+    # 以华盛顿特区为中心，设置默认样式为简洁模式
     m = folium.Map(
         location=[38.9072, -77.0369],
         zoom_start=13,
-        tiles='OpenStreetMap'
+        tiles='CartoDB positron',  # 默认基础图层
+        attr='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        prefer_canvas=True  # 提升性能
     )
+    
+    # 添加其他可选图层（注意：不要重复添加默认图层）
+    # 用户可以通过右上角的图层按钮切换
+    
+    folium.TileLayer(
+        tiles='OpenStreetMap',
+        name='标准地图',
+        attr='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        overlay=False,  # 设置为基础图层
+        control=True
+    ).add_to(m)
+    
+    folium.TileLayer(
+        tiles='CartoDB dark_matter',
+        name='深色模式',
+        attr='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        overlay=False,
+        control=True
+    ).add_to(m)
+    
+    folium.TileLayer(
+        tiles='https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}.jpg',
+        name='地形图',
+        attr='Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        subdomains='abcd',
+        max_zoom=18,
+        overlay=False,
+        control=True
+    ).add_to(m)
+    
+    folium.TileLayer(
+        tiles='https://stamen-tiles-{s}.a.ssl.fastly.net/toner/{z}/{x}/{y}.png',
+        name='黑白模式',
+        attr='Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        subdomains='abcd',
+        max_zoom=20,
+        overlay=False,
+        control=True
+    ).add_to(m)
+    
+    # 添加图层控制按钮
+    folium.LayerControl(position='topright').add_to(m)
+    
+    # 添加全屏按钮（需要插件支持）
+    from folium import plugins
+    plugins.Fullscreen(
+        position='topleft',
+        title='全屏',
+        title_cancel='退出全屏',
+        force_separate_button=True
+    ).add_to(m)
+    
+    # 添加定位按钮
+    plugins.LocateControl(auto_start=False).add_to(m)
+    
+    # 添加测量工具
+    plugins.MeasureControl(
+        position='topleft',
+        primary_length_unit='kilometers',
+        secondary_length_unit='miles',
+        primary_area_unit='sqkilometers',
+        secondary_area_unit='acres'
+    ).add_to(m)
     
     # 添加区域标记（带中文弹窗）
     for region_id, info in REGION_INFO.items():
@@ -135,25 +205,48 @@ def create_map():
         </div>
         """
         
-        # 添加圆形标记
+        # 添加圆形标记（增大尺寸以便更清楚地看到）
         folium.CircleMarker(
             location=info['coords'],
-            radius=15 + bikes / 10,  # 大小反映车辆数量
+            radius=20 + bikes / 8,  # 增大基础尺寸
             popup=folium.Popup(popup_html, max_width=250),
+            tooltip=f"{region_id}区: {bikes}辆 - {info['name']}",  # 更详细的悬停提示
             color=color,
             fill=True,
             fillColor=color,
-            fillOpacity=0.6,
-            weight=2
+            fillOpacity=0.7,  # 增加不透明度
+            weight=3  # 增加边框宽度
         ).add_to(m)
         
-    # 添加文字标签（显示区域代码与车辆数）
+        # 添加文字标签（改进样式，增加背景和阴影）
         folium.Marker(
             location=info['coords'],
             icon=folium.DivIcon(
-                html=f'<div style="font-size: 12pt; color: black; font-weight: bold;">{region_id}: {bikes}辆</div>'
+                html=f'''
+                <div style="
+                    font-size: 11pt; 
+                    color: white; 
+                    font-weight: bold; 
+                    background-color: {color};
+                    padding: 4px 10px;
+                    border-radius: 12px;
+                    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+                    border: 2px solid white;
+                    white-space: nowrap;
+                    text-align: center;
+                ">{region_id}区: {bikes}辆</div>
+                '''
             )
         ).add_to(m)
+    
+    # 自动调整地图视图以包含所有标记点（解决显示不全的问题）
+    # 计算所有坐标的边界
+    if all_coords:
+        # 添加一些padding，确保标记不会太靠近边缘
+        m.fit_bounds(all_coords, padding=[50, 50])
+    
+    # 添加小地图（右下角）
+    plugins.MiniMap(toggle_display=True, position='bottomright').add_to(m)
     
     return m
 
@@ -229,7 +322,7 @@ def simulate_step():
     st.session_state.step += 1
 
 def main():
-    st.title("🗺️ 共享单车区域状态监控")
+    st.title(" 共享单车区域状态监控")
     st.markdown("**华盛顿特区 6 区域实时可视化**")
     st.markdown("---")
     
@@ -288,8 +381,10 @@ def main():
     map_col, info_col = st.columns([2, 1])
     
     with map_col:
-        st.markdown("### 📍 区域分布地图")
-        # 创建并显示地图（如果没有 streamlit_folium，则回退使用 components.html 渲染）
+        st.markdown("###  区域分布地图")
+        st.markdown(" **提示**: 使用右上角的图层按钮可以切换不同的地图背景样式")
+        
+        # 创建并显示地图
         m = create_map()
         if _ST_FOLIUM_AVAILABLE and st_folium is not None:
             st_folium(m, width=700, height=500)
@@ -310,6 +405,13 @@ def main():
         - 🔵 **蓝色**: 富余（>90%）
         
         *圆圈大小表示车辆数量，点击查看详细信息*
+        
+        **地图功能**：
+        -  右上角可切换5种地图背景样式
+        -  使用滚轮缩放地图
+        -  左上角有测量工具
+        -  右下角有缩略地图
+        -  悬停在标记上可快速查看车辆数
         """)
     
     with info_col:
@@ -344,13 +446,23 @@ def main():
         ### 如何使用
         
         1. **查看地图**: 地图上显示了华盛顿特区的6个服务区域
-        2. **运行模拟**: 点击"▶️ 运行一步"按钮，系统会：
+        2. **切换地图样式**: 点击右上角的图层按钮，可以选择：
+           - 📋 标准地图 - 详细的街道信息
+           - 🎨 简洁模式 - 清爽的背景，适合数据展示
+           - 🌙 深色模式 - 深色主题，护眼舒适
+           - 🏔️ 地形图 - 显示地形起伏
+           - ⚫ 黑白模式 - 专业商务风格
+        3. **运行模拟**: 点击"▶️ 运行一步"按钮，系统会：
            - 生成随机需求
            - PPO策略执行调度
            - 更新区域状态
-        3. **查看详情**: 点击地图上的标记查看区域详细信息
-        4. **自动运行**: 勾选"自动运行"可以持续模拟
-        5. **重置**: 点击"🔄 重置"恢复初始状态
+        4. **查看详情**: 点击地图上的标记查看区域详细信息，或悬停查看快速信息
+        5. **自动运行**: 勾选"自动运行"可以持续模拟
+        6. **重置**: 点击"🔄 重置"恢复初始状态
+        7. **地图工具**:
+           - 📏 左上角测量工具可以测量距离和面积
+           - 🔍 滚轮缩放，拖拽移动
+           - 📍 右下角缩略图帮助定位
         
         ### 颜色含义
         - 红色区域需要紧急补给

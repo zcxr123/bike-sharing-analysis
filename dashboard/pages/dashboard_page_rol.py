@@ -18,7 +18,7 @@ except Exception:
     spec.loader.exec_module(_shared)
     inject_base_style = _shared.inject_base_style
 
-st.set_page_config(page_title="ROI计算器", page_icon="💰", layout="wide")
+st.set_page_config(page_title=" ROI计算器", layout="wide")
 
 # 注入共享样式
 inject_base_style()
@@ -70,12 +70,12 @@ def calculate_roi(n_cities, weekly_demand, cost_reduction_rate=0.76, profit_incr
 
 
 def main():
-    st.title("💰 ROI计算器")
+    st.title(" ROI计算器")
     st.markdown("**经济效益评估工具**")
     st.markdown("---")
     
     # 参数设置
-    st.markdown("### 🎛️ 参数设置")
+    st.markdown("###  参数设置")
     
     col1, col2 = st.columns(2)
     
@@ -105,7 +105,7 @@ def main():
     st.markdown("---")
     
     # 核心结果展示
-    st.markdown("### 📊 经济效益分析")
+    st.markdown("###  经济效益分析")
     st.markdown("")
     
     result_col1, result_col2, result_col3, result_col4 = st.columns(4)
@@ -142,7 +142,7 @@ def main():
     st.markdown("---")
     
     # 详细拆解
-    st.markdown("### 💡 效益拆解")
+    st.markdown("###  效益拆解")
     
     detail_col1, detail_col2 = st.columns(2)
     
@@ -151,7 +151,7 @@ def main():
         st.info(f"""
         **周成本节省**: ${results['weekly_cost_saving']:,.0f}
         - 单城市: ${results['weekly_cost_saving']/n_cities:,.0f}
-        - 来源: Day 7 → Day 8成本降低76%
+        - 来源: v1.0 → v2.0 成本降低76%
         
         **年成本节省**: ${results['weekly_cost_saving']*52:,.0f}
         """)
@@ -181,7 +181,7 @@ def main():
     st.markdown("---")
     
     # 敏感性分析
-    st.markdown("### 📈 敏感性分析")
+    st.markdown("###  敏感性分析")
     
     tab1, tab2 = st.tabs(["城市数量影响", "需求量影响"])
     
@@ -226,7 +226,7 @@ def main():
         - 50个城市: ${calculate_roi(50, weekly_demand)['annual_benefit']:,.0f}
         - 100个城市: ${calculate_roi(100, weekly_demand)['annual_benefit']:,.0f}
         
-        💡 **洞察**: 效益随城市数量**线性增长**，规模化优势明显
+         **洞察**: 效益随城市数量**线性增长**，规模化优势明显
         """)
     
     with tab2:
@@ -264,7 +264,7 @@ def main():
     st.markdown("---")
     
     # 回本期分析
-    st.markdown("### ⏱️ 回本期分析")
+    st.markdown("###  回本期分析")
     
     payback_col1, payback_col2 = st.columns([2, 1])
     
@@ -313,16 +313,16 @@ def main():
         st.metric("年ROI", f"{results['roi']*100:.0f}%")
         
         if results['payback_period_weeks'] < 13:
-            st.success("✅ 优秀：3个月内回本")
+            st.success(" 优秀：3个月内回本")
         elif results['payback_period_weeks'] < 26:
-            st.info("👍 良好：6个月内回本")
+            st.info(" 良好：6个月内回本")
         else:
-            st.warning("⏰ 需要更长回本期")
+            st.warning(" 需要更长回本期")
     
     st.markdown("---")
     
     # 多年效益展望
-    st.markdown("### 🔮 多年效益展望")
+    st.markdown("###  多年效益展望")
     
     years = [1, 2, 3, 4, 5]
     cumulative_benefits = [
@@ -356,7 +356,7 @@ def main():
     st.markdown("---")
     
     # 下载报告
-    st.markdown("### 📥 下载分析报告")
+    st.markdown("###  下载分析报告")
     
     report_data = {
         '参数': ['城市数量', '周需求量', '实施成本'],
@@ -381,18 +381,18 @@ def main():
     csv = report_df.to_csv(index=False)
     
     st.download_button(
-        label="📥 下载ROI分析报告 (CSV)",
+        label=" 下载ROI分析报告 (CSV)",
         data=csv,
         file_name=f"roi_analysis_{n_cities}cities.csv",
         mime="text/csv"
     )
     
     # 假设条件说明
-    with st.expander("ℹ️ 计算假设说明"):
+    with st.expander(" 计算假设说明"):
         st.markdown("""
         **基础数据来源**：
-        - 成本节省：基于Day 7 → Day 8的76%降低（$2,172 → $520，节省$1,652/周）
-        - 利润增加：基于Day 7 → Day 8的3%提升（$123,197 → $127,045，增加$3,848/周）
+        - 成本节省：基于v1.0 → v2.0的76%降低（$2,172 → $520，节省$1,652/周）
+        - 利润增加：基于v1.0 → v2.0的3%提升（$123,197 → $127,045，增加$3,848/周）
         
         **假设条件**：
         - 实施成本：假设每城市$50,000（一次性）

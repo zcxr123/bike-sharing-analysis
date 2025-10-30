@@ -1,6 +1,6 @@
 """
 共享单车智能调度系统 - Dashboard主页
-Day 10 - 项目概览
+项目概览
 """
 
 import streamlit as st
@@ -10,8 +10,7 @@ from pathlib import Path
 
 # 页面配置
 st.set_page_config(
-    page_title="共享单车RL调度系统",
-    page_icon="🚲",
+    page_title=" 共享单车调度系统",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -48,7 +47,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # 侧边栏
-st.sidebar.title("🚲 导航")
+st.sidebar.title(" 导航")
 st.sidebar.markdown("---")
 st.sidebar.info("""
 **共享单车智能调度系统**
@@ -64,14 +63,14 @@ st.sidebar.info("""
 
 st.sidebar.markdown("---")
 st.sidebar.markdown("""
-### 📚 使用说明
+### 📖 使用说明
 
 **页面导航** 👈
-- 📊 项目概览
-- 🗺️ 地图可视化 ⭐
-- 📈 策略对比
-- 🔍 决策分析
-- 💰 ROI计算器
+-  项目概览
+-  地图可视化 ⭐
+-  策略对比
+-  决策分析
+-  ROI计算器
 
 **快速链接**
 - [GitHub](https://github.com)
@@ -110,7 +109,7 @@ def main():
     core_metrics = summary.get('core_metrics', {})
     
     # 核心成果指标
-    st.markdown("### 🎯 核心成果")
+    st.markdown("###  核心成果")
     st.markdown("")
     
     col1, col2, col3, col4 = st.columns(4)
@@ -119,7 +118,7 @@ def main():
         cost_reduction = core_metrics.get('cost_reduction_pct', 76.0)
         cost_saving = core_metrics.get('cost_reduction_abs', 1652)
         st.metric(
-            "成本降低",
+            " 成本降低",
             f"{cost_reduction:.1f}%",
             delta=f"-${cost_saving:.0f}/周",
             delta_color="normal"
@@ -129,7 +128,7 @@ def main():
         roi_improvement = core_metrics.get('roi_improvement', 4.3)
         roi_day8 = core_metrics.get('roi_day8', 244.2)
         st.metric(
-            "ROI提升",
+            " ROI提升",
             f"{roi_improvement:.1f}倍",
             delta=f"达到{roi_day8:.1f}",
             delta_color="normal"
@@ -138,7 +137,7 @@ def main():
     with col3:
         annual_benefit = core_metrics.get('annual_benefit', 283660)
         st.metric(
-            "年度效益",
+            " 年度效益",
             f"${annual_benefit/1000:.0f}K",
             delta="单城市",
             delta_color="normal"
@@ -147,7 +146,7 @@ def main():
     with col4:
         service_rate = core_metrics.get('service_rate_day8', 98.12)
         st.metric(
-            "服务率",
+            " 服务率",
             f"{service_rate:.1f}%",
             delta="最优平衡",
             delta_color="normal"
@@ -156,38 +155,14 @@ def main():
     st.markdown("")
     st.markdown("---")
     
-    # 项目进度
-    st.markdown("### 📅 项目进度")
-    st.markdown("")
-    
-    progress_col1, progress_col2 = st.columns([3, 1])
-    
-    with progress_col1:
-        # 进度条
-        milestones = [
-            ("M1: 数据与分析", 100),
-            ("M2: 调度模拟器", 100),
-            ("M3: RL训练", 100),
-            ("M4: 项目收尾", 50)
-        ]
-        
-        for milestone, progress in milestones:
-            st.progress(progress / 100, text=f"{milestone} - {progress}%")
-    
-    with progress_col2:
-        st.metric("总体进度", "88%", delta="Day 10/12")
-    
-    st.markdown("")
-    st.markdown("---")
-    
     # 关键洞察
-    st.markdown("### 🧠 核心发现")
+    st.markdown("###  核心发现")
     st.markdown("")
     
     insight_col1, insight_col2 = st.columns(2)
     
     with insight_col1:
-        with st.expander("**💡 高频低成本策略**", expanded=True):
+        with st.expander(" 高频低成本策略", expanded=True):
             st.markdown("""
             PPO发现了一个反直觉的创新策略：
             
@@ -200,10 +175,9 @@ def main():
             - 小额度高频次，灵活响应需求
             - 提前布局，避免紧急调度
             
-            这是AI自己学会的策略！
             """)
         
-        with st.expander("**🎯 98%的经济学智慧**"):
+        with st.expander(" 98%的经济学智慧"):
             st.markdown("""
             PPO没有追求100%服务率，而是自动停在98%：
             
@@ -211,22 +185,20 @@ def main():
             - **结果**: 边际收益递减
             - **智慧**: 自动找到最优平衡点
             
-            这体现了AI的经济学智慧！
             """)
     
     with insight_col2:
-        with st.expander("**⏰ 预测性调度策略**", expanded=True):
+        with st.expander(" 预测性调度策略", expanded=True):
             st.markdown("""
             PPO学会了在需求高峰**前**调度：
             
             - **高峰时段**: 15-17点、22-23点
             - **低谷时段**: 0-4点（减少调度）
             - **策略**: 未雨绸缪，提前布局
-            
-            不是被动响应，而是主动预防！
+
             """)
         
-        with st.expander("**📈 规模效应体现**"):
+        with st.expander(" 规模效应体现"):
             st.markdown("""
             高需求期成本反而更低：
             
@@ -234,21 +206,20 @@ def main():
             - **低需求期**: $1.72/步
             - **原因**: 批量服务摊薄成本
             
-            这是经济学的规模效应！
             """)
     
     st.markdown("")
     st.markdown("---")
     
     # 技术路线
-    st.markdown("### 🛠️ 技术架构")
+    st.markdown("###  技术架构")
     st.markdown("")
     
     tech_col1, tech_col2, tech_col3 = st.columns(3)
     
     with tech_col1:
         st.markdown("""
-        **🧠 核心算法**
+         核心算法
         - Proximal Policy Optimization (PPO)
         - 成本感知奖励函数
         - 超参数调优
@@ -256,7 +227,7 @@ def main():
     
     with tech_col2:
         st.markdown("""
-        **🔧 技术栈**
+         技术栈
         - Stable-Baselines3
         - OpenAI Gym
         - Python 3.10+
@@ -265,7 +236,7 @@ def main():
     
     with tech_col3:
         st.markdown("""
-        **📊 评估方法**
+         评估方法
         - 多场景测试
         - 基线对比
         - 决策可解释性分析
@@ -276,14 +247,14 @@ def main():
     st.markdown("---")
     
     # 快速导航
-    st.markdown("### 🚀 快速导航")
+    st.markdown("###  快速导航")
     st.markdown("")
     
     nav_col1, nav_col2, nav_col3, nav_col4 = st.columns(4)
     
     with nav_col1:
         st.success("""
-        **🗺️ 地图可视化**
+         地图可视化
         
         实时监控6个区域状态，运行调度模拟演示
         
@@ -292,16 +263,16 @@ def main():
     
     with nav_col2:
         st.info("""
-        **📈 策略对比**
+         策略对比
         
-        查看Day 7、Day 8和基线策略的详细对比分析
+        查看v1.0、v2.0和基线策略的详细对比分析
         
         👉 点击左侧导航栏
         """)
     
     with nav_col3:
         st.info("""
-        **🔍 决策分析**
+         决策分析
         
         深入理解PPO的决策机制和高频低成本策略
         
@@ -310,7 +281,7 @@ def main():
     
     with nav_col4:
         st.info("""
-        **💰 ROI计算器**
+         ROI计算器
         
         计算不同规模下的经济效益和投资回报
         
@@ -322,9 +293,9 @@ def main():
     
     # 数据预览
     if not summary:
-        st.warning("⚠️ 未找到汇总数据，请先运行 `python3 scripts/day10_prepare_data.py`")
+        st.warning(" 未找到汇总数据，请先运行 `python3 scripts/day10_prepare_data.py`")
     else:
-        with st.expander("📊 数据统计概览"):
+        with st.expander(" 数据统计概览"):
             df = load_comparison()
             if not df.empty:
                 st.markdown(f"**策略数**: {df['model'].nunique()}")
@@ -340,8 +311,6 @@ def main():
     st.markdown("---")
     st.markdown("""
     <div style='text-align: center; color: #666; font-size: 0.9rem;'>
-        <p>共享单车智能调度系统 v1.0 | 基于强化学习的成本优化方案</p>
-        <p>© 2025 | Day 10 Dashboard</p>
     </div>
     """, unsafe_allow_html=True)
 

@@ -18,7 +18,7 @@ except Exception:
     spec.loader.exec_module(_shared)
     inject_base_style = _shared.inject_base_style
 
-st.set_page_config(page_title="决策分析", page_icon="🔍", layout="wide")
+st.set_page_config(page_title=" 决策分析", layout="wide")
 
 # 注入共享样式
 inject_base_style()
@@ -33,7 +33,7 @@ def load_decision_data():
 
 
 def main():
-    st.title("🔍 决策分析")
+    st.title(" 决策分析")
     st.markdown("**深入理解 PPO 的决策机制**")
     st.markdown("---")
 
@@ -57,14 +57,14 @@ def main():
 
         # 显示示例说明
         st.markdown("---")
-        st.markdown("### 💡 本页面将展示的内容")
+        st.markdown("###  本页面将展示的内容")
 
         col1, col2 = st.columns(2)
 
         with col1:
             st.info(
                 """
-                **🎯 决策模式分析**
+                ** 决策模式分析**
                 - 调度频率分析
                 - 调度时段分布
                 - 成本时间模式
@@ -74,7 +74,7 @@ def main():
 
             st.info(
                 """
-                **📍 空间分布分析**
+                ** 空间分布分析**
                 - 热点区域识别
                 - 调度路径可视化
                 - 区域调度频率
@@ -85,7 +85,7 @@ def main():
         with col2:
             st.info(
                 """
-                **💰 成本结构分析**
+                ** 成本结构分析**
                 - 单次调度成本
                 - 成本分布统计
                 - 距离-成本关系
@@ -95,7 +95,7 @@ def main():
 
             st.info(
                 """
-                **🧠 策略洞察**
+                ** 策略洞察**
                 - 高频低成本策略
                 - 预测性调度
                 - 批量服务效应
@@ -106,7 +106,7 @@ def main():
         return
 
     # 如果有数据，显示分析
-    st.markdown("### 📊 决策概览")
+    st.markdown("###  决策概览")
 
     # 核心指标
     mcol1, mcol2, mcol3, mcol4 = st.columns(4)
@@ -129,7 +129,7 @@ def main():
     st.markdown("---")
 
     # 时间模式分析
-    st.markdown("### ⏰ 时间模式分析")
+    st.markdown("###  时间模式分析")
 
     if 'hour' in df.columns and 'rebalance_cost' in df.columns:
         tab1, tab2 = st.tabs(["调度频率", "成本分布"])
@@ -193,12 +193,12 @@ def main():
             )
             st.plotly_chart(fig, width='stretch')
     else:
-        st.info("⚠️ 时间数据不完整，无法显示时间模式分析")
+        st.info(" 时间数据不完整，无法显示时间模式分析")
 
     st.markdown("---")
 
     # 成本分析
-    st.markdown("### 💰 成本分析")
+    st.markdown("###  成本分析")
 
     if 'rebalance_cost' in df.columns:
         ccol1, ccol2 = st.columns(2)
@@ -231,7 +231,7 @@ def main():
     st.markdown("---")
 
     # 调度效率分析
-    st.markdown("### 📈 调度效率分析")
+    st.markdown("###  调度效率分析")
 
     if 'num_moves' in df.columns and 'rebalance_cost' in df.columns:
         # 调度次数 vs 成本
@@ -256,12 +256,12 @@ def main():
         )
 
     # 原始数据查看
-    with st.expander("📄 查看原始决策数据"):
+    with st.expander(" 查看原始决策数据"):
         st.dataframe(df.head(100), width='stretch')
 
         csv = df.to_csv(index=False)
         st.download_button(
-            label="📥 下载完整决策数据",
+            label=" 下载完整决策数据",
             data=csv,
             file_name="decision_data.csv",
             mime="text/csv"
